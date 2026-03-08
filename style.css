@@ -60,3 +60,30 @@ font-weight:bold;
 button:hover{
 background:linear-gradient(45deg,#00ccff,#00ffcc);
 }
+.room-card{
+
+background:linear-gradient(135deg,#667eea,#764ba2);
+
+color:white;
+
+padding:20px;
+
+margin:15px;
+
+border-radius:15px;
+
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
+
+transition:0.4s;
+
+font-family:'Poppins',sans-serif;
+
+}
+
+.room-card:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 15px 25px rgba(0,0,0,0.5);
+
+}
