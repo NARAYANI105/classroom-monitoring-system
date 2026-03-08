@@ -1,114 +1,66 @@
 body{
-font-family: 'Segoe UI', Arial, sans-serif;
-background: linear-gradient(135deg,#1e3c72,#2a5298);
-text-align:center;
+font-family:'Poppins',sans-serif;
 margin:0;
-padding:0;
-color:#333;
-}
-
-h1{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
-padding:20px;
-letter-spacing:2px;
-text-shadow:2px 2px 5px black;
+text-align:center;
 }
 
-/* Classroom Card */
+.title{
+font-family:'Orbitron',sans-serif;
+font-size:40px;
+margin-top:30px;
+}
+
+.container{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+padding:40px;
+}
 
 .room{
-background:white;
-padding:25px;
-margin:25px auto;
-width:340px;
+background:rgba(255,255,255,0.1);
+width:280px;
 border-radius:15px;
-box-shadow:0 8px 20px rgba(0,0,0,0.3);
-transition:transform 0.3s, box-shadow 0.3s;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+transition:0.3s;
 }
-
-/* Hover effect */
 
 .room:hover{
-transform:translateY(-10px);
-box-shadow:0 15px 30px rgba(0,0,0,0.4);
+transform:scale(1.05);
+box-shadow:0 20px 40px rgba(0,0,0,0.6);
 }
 
-/* Section Titles */
+.room img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
 
 .room h2{
-color:#2a5298;
-border-bottom:2px solid #eee;
-padding-bottom:8px;
+margin:10px;
 }
-
-/* Equipment Sections */
-
-.room h3{
-margin-top:15px;
-color:#444;
-font-size:16px;
-text-decoration:underline;
-}
-
-/* Text styling */
 
 .room p{
-font-size:14px;
-margin:6px 0;
+margin:5px;
 }
 
-/* Status colors */
-
-.available{
-color:green;
-font-weight:bold;
-}
-
-.occupied{
-color:red;
-font-weight:bold;
-}
-
-/* Equipment condition */
-
-.working{
-color:#1abc9c;
-font-weight:bold;
-}
-
-.notworking{
-color:#e74c3c;
-font-weight:bold;
-}
-
-/* Small badge style */
-
-.badge{
+.status{
 display:inline-block;
-padding:4px 10px;
+margin:10px;
+padding:6px 12px;
 border-radius:20px;
-font-size:12px;
-color:white;
+font-size:14px;
 }
 
-.badge-good{
-background:#27ae60;
+.active{
+background:#00ff88;
+color:black;
 }
 
-.badge-bad{
-background:#c0392b;
-}
-
-/* Mobile responsive */
-
-@media(max-width:600px){
-
-.room{
-width:90%;
-}
-
-h1{
-font-size:22px;
-}
-
+.empty{
+background:#ff4d4d;
 }
