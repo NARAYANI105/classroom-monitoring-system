@@ -1,0 +1,18 @@
+body{
+font-family: Arial;
+background:#f4f4f4;
+text-align:center;
+}
+
+h1{
+color:#333;
+}
+
+.room{
+background:white;
+padding:20px;
+margin:20px auto;
+width:300px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
