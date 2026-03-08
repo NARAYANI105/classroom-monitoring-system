@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Classroom Monitoring System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Orbitron&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h1 class="title">🏫 Classroom Monitoring System</h1>
+
+<div class="container" id="roomsContainer"></div>
+
+<script>
+
+const container = document.getElementById("roomsContainer");
+
+function createRoom(name){
+
+const room = document.createElement("div");
+room.className="room";
+
+room.innerHTML = `
+
+<img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b">
+
+<h2>${name}</h2>
+
+<p>🪑 Benches: 40</p>
+<p>💻 CPUs: Working</p>
+<p>📽 Projector: Working</p>
+<p>🔋 Battery Replace: 2026</p>
+
+<span class="status active">Available</span>
+
+`;
+
+container.appendChild(room);
+
+}
+
+for(let i=1;i<=70;i++){
+createRoom("Classroom "+i);
+}
+
+for(let i=1;i<=20;i++){
+createRoom("Lab "+i);
+}
+
+</script>
+
+</body>
+
+</html>
