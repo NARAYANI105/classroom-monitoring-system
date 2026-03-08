@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Classroom Monitoring System</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>🏫 Classroom Monitoring System</h1>
+
+<div id="container"></div>
+
+<script>
+
+let totalRooms = 70;
+let totalLabs = 20;
+
+let container = document.getElementById("container");
+
+function createRoom(name){
+
+let data = JSON.parse(localStorage.getItem(name)) || {
+benches:"",
+projector:"",
+cpu:"",
+status:"",
+purchase:"",
+battery:"",
+replace:"",
+service:"",
+nextservice:""
+};
+
+let div = document.createElement("div");
+div.className="room";
+
+div.innerHTML=`
+
+<h2>${name}</h2>
+
+<label>Benches</label>
+<input value="${data.benches}" id="${name}-bench">
+
+<label>Projector</label>
+<select id="${name}-proj">
+<option>Working</option>
+<option>Not Working</option>
+</select>
+
+<label>CPU</label>
+<select id="${name}-cpu">
+<option>Working</option>
+<option>Not Working</option>
+</select>
+
+<label>Status</label>
+<select id="${name}-status">
+<option>Available</option>
+<option>Occupied</option>
+</select>
+
+<label>Equipment Purchase Date</label>
+<input type="date" id="${name}-purchase">
+
+<label>Remote Battery Purchase</label>
+<input type="date" id="${name}-battery">
+
+<label>Battery Replace Date</label>
+<input type="date" id="${name}-replace">
+
+<label>Last Service</label>
+<input type="date" id="${name}-service">
+
+<label>Next Service</label>
+<input type="date" id="${name}-nextservice">
+
+<button onclick="saveRoom('${name}')">Save</button>
+
+`;
+
+container.appendChild(div);
+
+}
+
+function saveRoom(name){
+
+let data={
+benches:document.getElementById(name+"-bench").value,
+projector:document.getElementById(name+"-proj").value,
+cpu:document.getElementById(name+"-cpu").value,
+status:document.getElementById(name+"-status").value,
+purchase:document.getElementById(name+"-purchase").value,
+battery:document.getElementById(name+"-battery").value,
+replace:document.getElementById(name+"-replace").value,
+service:document.getElementById(name+"-service").value,
+nextservice:document.getElementById(name+"-nextservice").value
+};
+
+localStorage.setItem(name,JSON.stringify(data));
+
+alert(name+" Updated!");
+
+}
+
+for(let i=1;i<=totalRooms;i++){
+createRoom("Classroom "+i);
+}
+
+for(let i=1;i<=totalLabs;i++){
+createRoom("Lab "+i);
+}
+
+</script>
+
+</body>
+</html>
