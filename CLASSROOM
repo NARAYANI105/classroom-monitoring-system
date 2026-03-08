@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Classroom Monitoring System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h1 class="title">🏫 Ramco Institute Classroom Monitoring</h1>
+
+<div class="container" id="container"></div>
+
+<script>
+
+const classrooms=[
+["A1L03","First Year CSE B"],
+["A1L04","First Year AIML"],
+["A2L05","First Year MECH"],
+["A2L04","First Year CSE A"],
+["A2L03","First Year IT"],
+["A2L02","First Year ECE B"],
+["A2L01","First Year ECE A"],
+["B0L01","First Year AD A"],
+["B0L02","First Year AD B"],
+["B0L03","First Year CSBS"],
+["B1L05","First Year EEE"],
+["B1L04","First Year CSE C"],
+["B1L02","First Year Civil"],
+["B3L05","Final Year AD A"],
+["B3L04","Third Year Civil"],
+["B3L03","Second Year Civil"],
+["B3L02","Final Year CSBS"],
+["C2L05","Second Year MECH"],
+["C2L04","Third Year MECH"],
+["C2L03","Final Year MECH"],
+["C2L02","Third Year IT"],
+["C2L01","Second Year IT"],
+["C3L01","Third Year AD A"],
+["C3L02","Third Year AD B"],
+["C3L03","Second Year AD A"],
+["C3L04","Second Year AD B"],
+["B3R02","Second Year EEE"],
+["B3R03","Third Year EEE"],
+["B3R04","Third Year CSBS"],
+["B3R05","Second Year CSBS"],
+["C3R01","Second Year ECE A"],
+["C3R02","Second Year ECE B"],
+["C3R03","Third Year ECE A"],
+["C3R04","Third Year ECE B"],
+["C3R05","Final Year ECE A"],
+["C2R04","Second Year CSE A"],
+["C2R05","Second Year CSE B"],
+["C2R06","Second Year CSE C"],
+["A2R02","Third Year CSE A"],
+["A2R03","Third Year CSBS B"]
+];
+
+const container=document.getElementById("container");
+
+classrooms.forEach(room=>{
+
+let hall=room[0];
+let name=room[1];
+
+let data=JSON.parse(localStorage.getItem(hall))||{
+bench:"",
+projector:"",
+cpu:"",
+status:"",
+purchase:"",
+battery:"",
+replace:"",
+service:"",
+next:""
+};
+
+let card=document.createElement("div");
+card.className="room";
+
+card.innerHTML=`
+
+<h2>${hall}</h2>
+<p>${name}</p>
+
+<label>🪑 Benches</label>
+<input id="${hall}-bench" value="${data.bench}">
+
+<label>📽 Projector</label>
+<select id="${hall}-projector">
+<option>Working</option>
+<option>Not Working</option>
+</select>
+
+<label>💻 CPU</label>
+<select id="${hall}-cpu">
+<option>Working</option>
+<option>Not Working</option>
+</select>
+
+<label>📊 Status</label>
+<select id="${hall}-status">
+<option>Available</option>
+<option>Occupied</option>
+</select>
+
+<label>📅 Equipment Purchase</label>
+<input type="date" id="${hall}-purchase">
+
+<label>🔋 Battery Purchase</label>
+<input type="date" id="${hall}-battery">
+
+<label>⚡ Battery Replace</label>
+<input type="date" id="${hall}-replace">
+
+<label>🛠 Last Service</label>
+<input type="date" id="${hall}-service">
+
+<label>⏭ Next Service</label>
+<input type="date" id="${hall}-next">
+
+<button onclick="save('${hall}')">Save</button>
+
+`;
+
+container.appendChild(card);
+
+});
+
+function save(hall){
+
+let data={
+bench:document.getElementById(hall+"-bench").value,
+projector:document.getElementById(hall+"-projector").value,
+cpu:document.getElementById(hall+"-cpu").value,
+status:document.getElementById(hall+"-status").value,
+purchase:document.getElementById(hall+"-purchase").value,
+battery:document.getElementById(hall+"-battery").value,
+replace:document.getElementById(hall+"-replace").value,
+service:document.getElementById(hall+"-service").value,
+next:document.getElementById(hall+"-next").value
+};
+
+localStorage.setItem(hall,JSON.stringify(data));
+
+alert("Data saved for "+hall);
+
+}
+
+</script>
+
+</body>
+</html>
