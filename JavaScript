@@ -1,0 +1,85 @@
+const classrooms = [
+{
+name: "Room 101",
+students: 32,
+status: "Active",
+benches: 20,
+projector: "Working",
+cpu: "Working",
+purchaseDate: "2024-01-10",
+batteryPurchase: "2025-01-01",
+batteryReplace: "2025-07-01",
+lastService: "2025-02-10",
+nextService: "2025-08-10"
+},
+
+{
+name: "Room 102",
+students: 0,
+status: "Empty",
+benches: 18,
+projector: "Not Working",
+cpu: "Working",
+purchaseDate: "2023-12-15",
+batteryPurchase: "2025-02-01",
+batteryReplace: "2025-08-01",
+lastService: "2025-03-05",
+nextService: "2025-09-05"
+},
+
+{
+name: "Room 103",
+students: 28,
+status: "Active",
+benches: 22,
+projector: "Working",
+cpu: "Working",
+purchaseDate: "2024-02-05",
+batteryPurchase: "2025-01-15",
+batteryReplace: "2025-07-15",
+lastService: "2025-04-01",
+nextService: "2025-10-01"
+}
+];function displayRooms(){
+
+const container = document.getElementById("roomsContainer");
+container.innerHTML="";
+
+classrooms.forEach(room => {
+
+const card = document.createElement("div");
+card.className="room-card";
+
+card.innerHTML=`
+
+<h2>🏫 ${room.name}</h2>
+
+<p>👨‍🎓 Students: ${room.students}</p>
+
+<p>📊 Status: ${room.status}</p>
+
+<p>🪑 Benches Available: ${room.benches}</p>
+
+<p>📽 Projector: ${room.projector}</p>
+
+<p>💻 CPU: ${room.cpu}</p>
+
+<p>📅 Equipment Purchase: ${room.purchaseDate}</p>
+
+<p>🔋 Battery Purchase: ${room.batteryPurchase}</p>
+
+<p>⚠ Battery Replace: ${room.batteryReplace}</p>
+
+<p>🛠 Last Service: ${room.lastService}</p>
+
+<p>⏳ Next Service: ${room.nextService}</p>
+
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+displayRooms();
