@@ -1,18 +1,114 @@
 body{
-font-family: Arial;
-background:#f4f4f4;
+font-family: 'Segoe UI', Arial, sans-serif;
+background: linear-gradient(135deg,#1e3c72,#2a5298);
 text-align:center;
-}
-
-h1{
+margin:0;
+padding:0;
 color:#333;
 }
 
+h1{
+color:white;
+padding:20px;
+letter-spacing:2px;
+text-shadow:2px 2px 5px black;
+}
+
+/* Classroom Card */
+
 .room{
 background:white;
-padding:20px;
-margin:20px auto;
-width:300px;
-border-radius:10px;
-box-shadow:0 0 10px gray;
+padding:25px;
+margin:25px auto;
+width:340px;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+transition:transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect */
+
+.room:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* Section Titles */
+
+.room h2{
+color:#2a5298;
+border-bottom:2px solid #eee;
+padding-bottom:8px;
+}
+
+/* Equipment Sections */
+
+.room h3{
+margin-top:15px;
+color:#444;
+font-size:16px;
+text-decoration:underline;
+}
+
+/* Text styling */
+
+.room p{
+font-size:14px;
+margin:6px 0;
+}
+
+/* Status colors */
+
+.available{
+color:green;
+font-weight:bold;
+}
+
+.occupied{
+color:red;
+font-weight:bold;
+}
+
+/* Equipment condition */
+
+.working{
+color:#1abc9c;
+font-weight:bold;
+}
+
+.notworking{
+color:#e74c3c;
+font-weight:bold;
+}
+
+/* Small badge style */
+
+.badge{
+display:inline-block;
+padding:4px 10px;
+border-radius:20px;
+font-size:12px;
+color:white;
+}
+
+.badge-good{
+background:#27ae60;
+}
+
+.badge-bad{
+background:#c0392b;
+}
+
+/* Mobile responsive */
+
+@media(max-width:600px){
+
+.room{
+width:90%;
+}
+
+h1{
+font-size:22px;
+}
+
 }
