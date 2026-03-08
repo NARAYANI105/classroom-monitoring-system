@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIT Classroom Infrastructure Monitor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #48bb78;
+            --danger-color: #f56565;
+            --warning-color: #fbbf24;
+            --info-color: #4299e1;
+            --dark-color: #2d3748;
+            --light-color: #f7fafc;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff09" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat;
+            animation: wave 20s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0) translateY(0) rotate(0deg); }
+            50% { transform: translateX(-25%) translateY(-25%) rotate(180deg); }
+            100% { transform: translateX(0) translateY(0) rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0.8rem 1.5rem;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .nav-tab:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .nav-tab:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-tab i {
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-tab span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-tab.active {
+            background: var(--gradient-1);
+            color: white;
+            transform: scale(1.05);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+            50% { box-shadow: 0 0 0 15px rgba(102, 126, 234, 0); }
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Search and Filter */
+        .search-filter-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #667eea, #764ba2) border-box;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .filter-btn:hover {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Classroom Grid */
+        .classroom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .classroom-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInScale 0.6s ease-out;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .classroom-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .classroom-card:hover::before {
+            opacity: 1;
+        }
+
+        .classroom-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .classroom-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .classroom-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .classroom-name i {
+            color: #667eea;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        .status-available {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .status-occupied {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .classroom-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            transform: translateX(5px);
+        }
+
+        .detail-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .detail-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .classroom-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.6rem;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .action-btn i {
+            font-size: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUpModal 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideUpModal {
+            from { transform: translateY(100px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-close {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--gradient-1);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Equipment Section */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .equipment-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .equipment-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .equipment-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-working {
+            background: #48bb78;
+        }
+
+        .status-maintenance {
+            background: #fbbf24;
+        }
+
+        .status-broken {
+            background: #f56565;
+        }
+
+        /* Maintenance Section */
+        .maintenance-timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin-top: 2rem;
+        }
+
+        .maintenance-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-1);
+        }
+
+        .timeline-item {
+            position: relative;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 1.5rem;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            font-size: 1rem;
+            color: #2d3748;
+        }
+
+        /* Alert Section */
+        .alert-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 3000;
+            max-width: 400px;
+        }
+
+        .alert {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .alert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .alert-success .alert-icon {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .alert-warning .alert-icon {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.2rem;
+        }
+
+        .alert-message {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4000;
+        }
+
+        .loading-spinner.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .classroom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .classroom-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                padding: 1rem;
+            }
+
+            .nav-tab {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .header,
+            .nav-tabs,
+            .search-filter-section,
+            .classroom-actions,
+            .modal {
+                display: none !important;
+            }
+
+            .classroom-card {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>RAMCO INSTITUTE OF TECHNOLOGY</h1>
+                    <p>Classroom Infrastructure Monitor</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalRooms">40</span>
+                    <span>Total Rooms</span>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <span class="stat-number" id="availableRooms">0</span>
+                    <span>Available</span>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <span class="stat-number" id="occupiedRooms">0</span>
+                    <span>Occupied</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('classrooms')">
+            <i class="fas fa-door-open"></i>
+            <span>Classrooms</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('equipment')">
+            <i class="fas fa-desktop"></i>
+            <span>Equipment</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('maintenance')">
+            <i class="fas fa-tools"></i>
+            <span>Maintenance</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('reports')">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports</span>
+        </button>
+        <button class="nav-tab" onclick="switchTab('alerts')">
+            <i class="fas fa-bell"></i>
+            <span>Alerts</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Classrooms Section -->
+        <div class="content-section active" id="classrooms-section">
+            <div class="search-filter-section">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search classrooms, blocks, or departments...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn" onclick="filterByBlock('all')">
+                        <i class="fas fa-building"></i> All Blocks
+                    </button>
+                    <button class="filter-btn" onclick="filterByBlock('A')">
+                        <i class="fas fa-building"></i> Block A
+                    </button>
+                    <button class="filter-btn" onclick="filterByBlock('B')">
+                        <i class="fas fa-building"></i> Block B
+                    </button>
+                    <button class="filter-btn" onclick="filterByBlock('C')">
+                        <i class="fas fa-building"></i> Block C
+                    </button>
+                    <button class="filter-btn" onclick="filterByStatus('available')">
+                        <i class="fas fa-check-circle"></i> Available
+                    </button>
+                    <button class="filter-btn" onclick="filterByStatus('occupied')">
+                        <i class="fas fa-times-circle"></i> Occupied
+                    </button>
+                </div>
+            </div>
+
+            <div class="classroom-grid" id="classroomGrid">
+                <!-- Classroom cards will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Equipment Section -->
+        <div class="content-section" id="equipment-section">
+            <div class="search-filter-section">
+                <h2>Equipment Management</h2>
+            </div>
+            <div id="equipmentList">
+                <!-- Equipment list will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Maintenance Section -->
+        <div class="content-section" id="maintenance-section">
+            <div class="search-filter-section">
+                <h2>Maintenance Schedule</h2>
+            </div>
+            <div class="maintenance-timeline" id="maintenanceTimeline">
+                <!-- Maintenance timeline will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="content-section" id="reports-section">
+            <div class="search-filter-section">
+                <h2>Reports & Analytics</h2>
+            </div>
+            <canvas id="reportsChart"></canvas>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="content-section" id="alerts-section">
+            <div class="search-filter-section">
+                <h2>System Alerts</h2>
+            </div>
+            <div id="alertsList">
+                <!-- Alerts will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Classroom Details</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div class="alert-container" id="alertContainer"></div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // Classroom Data
+        const classrooms = [
+            // A Block 1st Floor
+            { id: 'A1L03', name: 'A1L03', department: 'First Year CSE B', block: 'A', floor: '1st', status: 'available', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'A1L04', name: 'A1L04', department: 'First Year AIML', block: 'A', floor: '1st', status: 'occupied', benches: 30, projector: 'working', cpu: 'maintenance' },
+            // A Block 2nd Floor
+            { id: 'A2L05', name: 'A2L05', department: 'First Year MECH', block: 'A', floor: '2nd', status: 'available', benches: 35, projector: 'working', cpu: 'working' },
+            { id: 'A2L04', name: 'A2L04', department: 'First Year CSE A', block: 'A', floor: '2nd', status: 'occupied', benches: 30, projector: 'maintenance', cpu: 'working' },
+            { id: 'A2L03', name: 'A2L03', department: 'First Year IT', block: 'A', floor: '2nd', status: 'available', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'A2L02', name: 'A2L02', department: 'First Year ECE B', block: 'A', floor: '2nd', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'A2L01', name: 'A2L01', department: 'First Year ECE A', block: 'A', floor: '2nd', status: 'available', benches: 30, projector: 'broken', cpu: 'working' },
+            { id: 'A2R02', name: 'A2R02', department: 'Third Year CSE A', block: 'A', floor: '2nd', status: 'occupied', benches: 35, projector: 'working', cpu: 'working' },
+            { id: 'A2R02A', name: 'A2R02A', department: 'Third Year CSE B', block: 'A', floor: '2nd', status: 'available', benches: 35, projector: 'working', cpu: 'maintenance' },
+            // B Block Ground Floor
+            { id: 'B0L01', name: 'B0L01', department: 'First Year AD A', block: 'B', floor: 'Ground', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'B0L02', name: 'B0L02', department: 'First Year AD B', block: 'B', floor: 'Ground', status: 'available', benches: 30, projector: 'maintenance', cpu: 'working' },
+            { id: 'B0L03', name: 'B0L03', department: 'First Year CSBS', block: 'B', floor: 'Ground', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            // B Block 1st Floor
+            { id: 'B1L05', name: 'B1L05', department: 'First Year EEE', block: 'B', floor: '1st', status: 'available', benches: 35, projector: 'working', cpu: 'broken' },
+            { id: 'B1L04', name: 'B1L04', department: 'First Year CSE C', block: 'B', floor: '1st', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'B1L02', name: 'B1L02', department: 'First Year Civil', block: 'B', floor: '1st', status: 'available', benches: 35, projector: 'broken', cpu: 'working' },
+            // B Block 3rd Floor
+            { id: 'B3L05', name: 'B3L05', department: 'Final Year AD A', block: 'B', floor: '3rd', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'B3L04', name: 'B3L04', department: 'Third Year CIVIL', block: 'B', floor: '3rd', status: 'available', benches: 35, projector: 'working', cpu: 'maintenance' },
+            { id: 'B3L03', name: 'B3L03', department: 'Second Year CIVIL', block: 'B', floor: '3rd', status: 'occupied', benches: 35, projector: 'working', cpu: 'working' },
+            { id: 'B3L02', name: 'B3L02', department: 'Final Year CSBS', block: 'B', floor: '3rd', status: 'available', benches: 30, projector: 'maintenance', cpu: 'working' },
+            { id: 'B3R02', name: 'B3R02', department: 'Second Year EEE', block: 'B', floor: '3rd', status: 'occupied', benches: 35, projector: 'working', cpu: 'working' },
+            { id: 'B3R03', name: 'B3R03', department: 'Third Year EEE', block: 'B', floor: '3rd', status: 'available', benches: 35, projector: 'working', cpu: 'broken' },
+            { id: 'B3R04', name: 'B3R04', department: 'Third Year CSBS', block: 'B', floor: '3rd', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'B3R05', name: 'B3R05', department: 'Second Year CSBS', block: 'B', floor: '3rd', status: 'available', benches: 30, projector: 'broken', cpu: 'working' },
+            // C Block 2nd Floor
+            { id: 'C2L05', name: 'C2L05', department: 'Second Year MECH', block: 'C', floor: '2nd', status: 'occupied', benches: 35, projector: 'working', cpu: 'working' },
+            { id: 'C2L04', name: 'C2L04', department: 'Third Year MECH', block: 'C', floor: '2nd', status: 'available', benches: 35, projector: 'working', cpu: 'maintenance' },
+            { id: 'C2L03', name: 'C2L03', department: 'Final Year MECH', block: 'C', floor: '2nd', status: 'occupied', benches: 35, projector: 'maintenance', cpu: 'working' },
+            { id: 'C2L02', name: 'C2L02', department: 'Third Year IT', block: 'C', floor: '2nd', status: 'available', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'C2L01', name: 'C2L01', department: 'Second Year IT', block: 'C', floor: '2nd', status: 'occupied', benches: 30, projector: 'working', cpu: 'broken' },
+            { id: 'C2R04', name: 'C2R04', department: 'Second Year CSE A', block: 'C', floor: '2nd', status: 'available', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'C2R05', name: 'C2R05', department: 'Second Year CSE B', block: 'C', floor: '2nd', status: 'occupied', benches: 30, projector: 'broken', cpu: 'working' },
+            { id: 'C2R06', name: 'C2R06', department: 'Second Year CSE C', block: 'C', floor: '2nd', status: 'available', benches: 30, projector: 'working', cpu: 'working' },
+            // C Block 3rd Floor
+            { id: 'C3L01', name: 'C3L01', department: 'Third Year AD A', block: 'C', floor: '3rd', status: 'occupied', benches: 30, projector: 'working', cpu: 'maintenance' },
+            { id: 'C3L02', name: 'C3L02', department: 'Third Year AD B', block: 'C', floor: '3rd', status: 'available', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'C3L03', name: 'C3L03', department: 'Second Year AD A', block: 'C', floor: '3rd', status: 'occupied', benches: 30, projector: 'maintenance', cpu: 'working' },
+            { id: 'C3L04', name: 'C3L04', department: 'Second Year AD B', block: 'C', floor: '3rd', status: 'available', benches: 30, projector: 'working', cpu: 'broken' },
+            { id: 'C3R01', name: 'C3R01', department: 'Second Year ECE-A', block: 'C', floor: '3rd', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'C3R02', name: 'C3R02', department: 'Second Year ECE-B', block: 'C', floor: '3rd', status: 'available', benches: 30, projector: 'broken', cpu: 'working' },
+            { id: 'C3R03', name: 'C3R03', department: 'Third Year ECE-A', block: 'C', floor: '3rd', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' },
+            { id: 'C3R04', name: 'C3R04', department: 'Third Year ECE-B', block: 'C', floor: '3rd', status: 'available', benches: 30, projector: 'working', cpu: 'maintenance' },
+            { id: 'C3R05', name: 'C3R05', department: 'Final Year ECE-A', block: 'C', floor: '3rd', status: 'occupied', benches: 30, projector: 'working', cpu: 'working' }
+        ];
+
+        // Equipment Data
+        const equipment = [];
+
+        // Initialize equipment for each classroom
+        classrooms.forEach(classroom => {
+            equipment.push({
+                classroomId: classroom.id,
+                projector: {
+                    status: classroom.projector,
+                    purchaseDate: '2023-01-15',
+                    lastService: '2024-01-15',
+                    nextService: '2025-01-15'
+                },
+                cpu: {
+                    status: classroom.cpu,
+                    purchaseDate: '2023-02-20',
+                    lastService: '2024-02-20',
+                    nextService: '2025-02-20'
+                },
+                remoteBattery: {
+                    purchaseDate: '2024-01-01',
+                    replacementDate: '2024-07-01',
+                    status: 'good'
+                }
+            });
+        });
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            renderClassrooms();
+            updateStats();
+            loadDataFromStorage();
+            checkMaintenanceAlerts();
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = 15 + Math.random() * 10 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Render Classrooms
+        function renderClassrooms() {
+            const grid = document.getElementById('classroomGrid');
+            grid.innerHTML = '';
+
+            classrooms.forEach(classroom => {
+                const card = createClassroomCard(classroom);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create Classroom Card
+        function createClassroomCard(classroom) {
+            const card = document.createElement('div');
+            card.className = 'classroom-card';
+            card.onclick = () => openClassroomModal(classroom);
+
+            const statusClass = classroom.status === 'available' ? 'status-available' : 'status-occupied';
+            const statusText = classroom.status === 'available' ? 'Available' : 'Occupied';
+
+            card.innerHTML = `
+                <div class="classroom-header">
+                    <div class="classroom-name">
+                        <i class="fas fa-door-open"></i>
+                        ${classroom.name}
+                    </div>
+                    <div class="status-badge ${statusClass}">
+                        ${statusText}
+                    </div>
+                </div>
+                <div class="classroom-details">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="detail-text">
+                            <span class="detail-label">Department</span>
+                            <span class="detail-value">${classroom.department}</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-chair"></i>
+                        </div>
+                        <div class="detail-text">
+                            <span class="detail-label">Benches</span>
+                            <span class="detail-value">${classroom.benches}</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="detail-text">
+                            <span class="detail-label">Projector</span>
+                            <span class="detail-value">${classroom.projector}</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="detail-text">
+                            <span class="detail-label">CPU</span>
+                            <span class="detail-value">${classroom.cpu}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="classroom-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); toggleStatus('${classroom.id}')">
+                        <i class="fas fa-sync-alt"></i>
+                        Toggle
+                    </button>
+                    <button class="action-btn" onclick="event.stopPropagation(); editClassroom('${classroom.id}')">
+                        <i class="fas fa-edit"></i>
+                        Edit
+                    </button>
+                    <button class="action-btn" onclick="event.stopPropagation(); viewDetails('${classroom.id}')">
+                        <i class="fas fa-info-circle"></i>
+                        Details
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Toggle Classroom Status
+        function toggleStatus(classroomId) {
+            const classroom = classrooms.find(c => c.id === classroomId);
+            if (classroom) {
+                classroom.status = classroom.status === 'available' ? 'occupied' : 'available';
+                renderClassrooms();
+                updateStats();
+                saveDataToStorage();
+                showAlert(`${classroom.name} status changed to ${classroom.status}`, 'success');
+            }
+        }
+
+        // Edit Classroom
+        function editClassroom(classroomId) {
+            const classroom = classrooms.find(c => c.id === classroomId);
+            if (classroom) {
+                openEditModal(classroom);
+            }
+        }
+
+        // View Details
+        function viewDetails(classroomId) {
+            const classroom = classrooms.find(c => c.id === classroomId);
+            if (classroom) {
+                openClassroomModal(classroom);
+            }
+        }
+
+        // Open Classroom Modal
+        function openClassroomModal(classroom) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalTitle.innerHTML = `<i class="fas fa-door-open"></i> ${classroom.name} - ${classroom.department}`;
+            
+            const equipmentData = equipment.find(e => e.classroomId === classroom.id);
+            
+            modalBody.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Block & Floor</label>
+                    <p>Block ${classroom.block}, ${classroom.floor} Floor</p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current Status</label>
+                    <p><span class="status-badge ${classroom.status === 'available' ? 'status-available' : 'status-occupied'}">
+                        ${classroom.status === 'available' ? 'Available' : 'Occupied'}
+                    </span></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Infrastructure Details</label>
+                    <div class="equipment-grid">
+                        <div class="equipment-card">
+                            <div class="equipment-title">
+                                <i class="fas fa-chair"></i> Benches
+                            </div>
+                            <div class="equipment-status">
+                                Total: ${classroom.benches}
+                            </div>
+                        </div>
+                        <div class="equipment-card">
+                            <div class="equipment-title">
+                                <i class="fas fa-video"></i> Projector
+                            </div>
+                            <div class="equipment-status">
+                                <span class="status-indicator status-${classroom.projector === 'working' ? 'working' : classroom.projector === 'maintenance' ? 'maintenance' : 'broken'}"></span>
+                                ${classroom.projector}
+                            </div>
+                            <small>Next Service: ${equipmentData.projector.nextService}</small>
+                        </div>
+                        <div class="equipment-card">
+                            <div class="equipment-title">
+                                <i class="fas fa-desktop"></i> CPU
+                            </div>
+                            <div class="equipment-status">
+                                <span class="status-indicator status-${classroom.cpu === 'working' ? 'working' : classroom.cpu === 'maintenance' ? 'maintenance' : 'broken'}"></span>
+                                ${classroom.cpu}
+                            </div>
+                            <small>Next Service: ${equipmentData.cpu.nextService}</small>
+                        </div>
+                        <div class="equipment-card">
+                            <div class="equipment-title">
+                                <i class="fas fa-battery-full"></i> Remote Battery
+                            </div>
+                            <div class="equipment-status">
+                                <span class="status-indicator status-working"></span>
+                                ${equipmentData.remoteBattery.status}
+                            </div>
+                            <small>Replace by: ${equipmentData.remoteBattery.replacementDate}</small>
+                        </div>
+                    </div>
+                </div>
+                <button class="submit-btn" onclick="closeModal()">
+                    <i class="fas fa-check"></i> Close
+                </button>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Open Edit Modal
+        function openEditModal(classroom) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            modalTitle.innerHTML = `<i class="fas fa-edit"></i> Edit ${classroom.name}`;
+            
+            modalBody.innerHTML = `
+                <form onsubmit="saveClassroomChanges(event, '${classroom.id}')">
+                    <div class="form-group">
+                        <label class="form-label">Number of Benches</label>
+                        <input type="number" class="form-input" id="editBenches" value="${classroom.benches}" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Projector Status</label>
+                            <select class="form-select" id="editProjector" required>
+                                <option value="working" ${classroom.projector === 'working' ? 'selected' : ''}>Working</option>
+                                <option value="maintenance" ${classroom.projector === 'maintenance' ? 'selected' : ''}>Under Maintenance</option>
+                                <option value="broken" ${classroom.projector === 'broken' ? 'selected' : ''}>Broken</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CPU Status</label>
+                            <select class="form-select" id="editCpu" required>
+                                <option value="working" ${classroom.cpu === 'working' ? 'selected' : ''}>Working</option>
+                                <option value="maintenance" ${classroom.cpu === 'maintenance' ? 'selected' : ''}>Under Maintenance</option>
+                                <option value="broken" ${classroom.cpu === 'broken' ? 'selected' : ''}>Broken</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </form>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Save Classroom Changes
+        function saveClassroomChanges(event, classroomId) {
+            event.preventDefault();
+            
+            const classroom = classrooms.find(c => c.id === classroomId);
+            if (classroom) {
+                classroom.benches = parseInt(document.getElementById('editBenches').value);
+                classroom.projector = document.getElementById('editProjector').value;
+                classroom.cpu = document.getElementById('editCpu').value;
+                
+                renderClassrooms();
+                saveDataToStorage();
+                closeModal();
+                showAlert(`${classroom.name} updated successfully!`, 'success');
+            }
+        }
+
+        // Close Modal
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        // Switch Tabs
+        function switchTab(tabName) {
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-section`).classList.add('active');
+
+            // Load content for specific tabs
+            if (tabName === 'equipment') {
+                loadEquipmentSection();
+            } else if (tabName === 'maintenance') {
+                loadMaintenanceSection();
+            } else if (tabName === 'alerts') {
+                loadAlertsSection();
+            }
+        }
+
+        // Load Equipment Section
+        function loadEquipmentSection() {
+            const equipmentList = document.getElementById('equipmentList');
+            let html = '';
+            
+            classrooms.forEach(classroom => {
+                const equipmentData = equipment.find(e => e.classroomId === classroom.id);
+                html += `
+                    <div class="classroom-card">
+                        <h3>${classroom.name} - ${classroom.department}</h3>
+                        <div class="equipment-grid">
+                            <div class="equipment-card">
+                                <div class="equipment-title">
+                                    <i class="fas fa-video"></i> Projector
+                                </div>
+                                <p>Status: ${classroom.projector}</p>
+                                <p>Purchase: ${equipmentData.projector.purchaseDate}</p>
+                                <p>Last Service: ${equipmentData.projector.lastService}</p>
+                                <p>Next Service: ${equipmentData.projector.nextService}</p>
+                            </div>
+                            <div class="equipment-card">
+                                <div class="equipment-title">
+                                    <i class="fas fa-desktop"></i> CPU
+                                </div>
+                                <p>Status: ${classroom.cpu}</p>
+                                <p>Purchase: ${equipmentData.cpu.purchaseDate}</p>
+                                <p>Last Service: ${equipmentData.cpu.lastService}</p>
+                                <p>Next Service: ${equipmentData.cpu.nextService}</p>
+                            </div>
+                            <div class="equipment-card">
+                                <div class="equipment-title">
+                                    <i class="fas fa-battery-full"></i> Remote Battery
+                                </div>
+                                <p>Purchase: ${equipmentData.remoteBattery.purchaseDate}</p>
+                                <p>Replace by: ${equipmentData.remoteBattery.replacementDate}</p>
+                                <p>Status: ${equipmentData.remoteBattery.status}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            equipmentList.innerHTML = html;
+        }
+
+        // Load Maintenance Section
+        function loadMaintenanceSection() {
+            const timeline = document.getElementById('maintenanceTimeline');
+            let html = '';
+            
+            const maintenanceItems = [
+                { date: '2024-12-15', content: 'Projector maintenance due for A1L03', type: 'projector' },
+                { date: '2024-12-20', content: 'CPU service scheduled for B1L05', type: 'cpu' },
+                { date: '2024-12-25', content: 'Battery replacement needed for C2L05', type: 'battery' },
+                { date: '2025-01-05', content: 'Quarterly maintenance for all Block A equipment', type: 'general' },
+                { date: '2025-01-15', content: 'Annual service for all projectors', type: 'projector' }
+            ];
+            
+            maintenanceItems.forEach(item => {
+                html += `
+                    <div class="timeline-item">
+                        <div class="timeline-date">${item.date}</div>
+                        <div class="timeline-content">
+                            <i class="fas fa-${item.type === 'projector' ? 'video' : item.type === 'cpu' ? 'desktop' : item.type === 'battery' ? 'battery-full' : 'tools'}"></i>
+                            ${item.content}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            timeline.innerHTML = html;
+        }
+
+        // Load Alerts Section
+        function loadAlertsSection() {
+            const alertsList = document.getElementById('alertsList');
+            let html = '';
+            
+            const alerts = [
+                { type: 'warning', title: 'Maintenance Reminder', message: '5 projectors require service this month' },
+                { type: 'success', title: 'Equipment Updated', message: 'All CPUs in Block B have been serviced' },
+                { type: 'warning', title: 'Battery Replacement', message: '8 remote batteries need replacement within 30 days' },
+                { type: 'success', title: 'New Equipment', message: 'New projector installed in C3R05' }
+            ];
+            
+            alerts.forEach(alert => {
+                html += `
+                    <div class="alert alert-${alert.type}">
+                        <div class="alert-icon">
+                            <i class="fas fa-${alert.type === 'warning' ? 'exclamation-triangle' : 'check-circle'}"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">${alert.title}</div>
+                            <div class="alert-message">${alert.message}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            alertsList.innerHTML = html;
+        }
+
+        // Search Functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.classroom-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter Functions
+        function filterByBlock(block) {
+            const cards = document.querySelectorAll('.classroom-card');
+            
+            cards.forEach(card => {
+                if (block === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardText = card.textContent;
+                    if (cardText.includes(`Block ${block}`)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function filterByStatus(status) {
+            const cards = document.querySelectorAll('.classroom-card');
+            
+            cards.forEach(card => {
+                const statusBadge = card.querySelector('.status-badge');
+                if (statusBadge) {
+                    const cardStatus = statusBadge.textContent.toLowerCase().trim();
+                    if (cardStatus === status) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Update Statistics
+        function updateStats() {
+            const available = classrooms.filter(c => c.status === 'available').length;
+            const occupied = classrooms.filter(c => c.status === 'occupied').length;
+            
+            document.getElementById('availableRooms').textContent = available;
+            document.getElementById('occupiedRooms').textContent = occupied;
+        }
+
+        // Show Alert
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <div class="alert-icon">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                </div>
+                <div class="alert-content">
+                    <div class="alert-title">${type === 'success' ? 'Success' : 'Alert'}</div>
+                    <div class="alert-message">${message}</div>
+                </div>
+            `;
+            
+            alertContainer.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => {
+                    alert.remove();
+                }, 500);
+            }, 3000);
+        }
+
+        // Check Maintenance Alerts
+        function checkMaintenanceAlerts() {
+            const today = new Date();
+            equipment.forEach(eq => {
+                const nextServiceDate = new Date(eq.projector.nextService);
+                const daysDiff = Math.floor((nextServiceDate - today) / (1000 * 60 * 60 * 24));
+                
+                if (daysDiff <= 30 && daysDiff > 0) {
+                    const classroom = classrooms.find(c => c.id === eq.classroomId);
+                    showAlert(`Projector service due for ${classroom.name} in ${daysDiff} days`, 'warning');
+                }
+            });
+        }
+
+        // Local Storage Functions
+        function saveDataToStorage() {
+            localStorage.setItem('classrooms', JSON.stringify(classrooms));
+            localStorage.setItem('equipment', JSON.stringify(equipment));
+        }
+
+        function loadDataFromStorage() {
+            const storedClassrooms = localStorage.getItem('classrooms');
+            const storedEquipment = localStorage.getItem('equipment');
+            
+            if (storedClassrooms) {
+                const data = JSON.parse(storedClassrooms);
+                data.forEach((stored, index) => {
+                    if (classrooms[index]) {
+                        classrooms[index].status = stored.status;
+                        classrooms[index].benches = stored.benches;
+                        classrooms[index].projector = stored.projector;
+                        classrooms[index].cpu = stored.cpu;
+                    }
+                });
+                renderClassrooms();
+                updateStats();
+            }
+        }
+
+        // Modal close on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
