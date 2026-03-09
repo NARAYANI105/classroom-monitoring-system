@@ -1,80 +1,59 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Admin Login</title>
+<title>Classroom Monitoring Login</title>
 
 <style>
 
 body{
-font-family: Arial;
-background: linear-gradient(135deg,#ff512f,#dd2476);
-height:100vh;
+font-family:Arial;
+background:#0f2027;
+background:linear-gradient(to right,#2c5364,#203a43,#0f2027);
 display:flex;
 justify-content:center;
 align-items:center;
+height:100vh;
+color:white;
 }
 
-.login-box{
-background:white;
+.box{
+background:#ffffff10;
 padding:40px;
 border-radius:10px;
 text-align:center;
-width:300px;
-}
-
-input{
-width:100%;
-padding:10px;
-margin:10px 0;
+backdrop-filter:blur(10px);
 }
 
 button{
-padding:10px 20px;
-background:#ff512f;
-color:white;
+width:200px;
+padding:12px;
+margin:10px;
 border:none;
+border-radius:5px;
+font-size:16px;
 cursor:pointer;
 }
 
+.admin{background:#ff4b2b;color:white;}
+.staff{background:#2196F3;color:white;}
+.student{background:#4CAF50;color:white;}
+
 </style>
-
-<script>
-
-function loginAdmin(){
-
-var id=document.getElementById("id").value
-var pass=document.getElementById("pass").value
-
-if(id=="admin" && pass=="1234")
-{
-alert("Login Successful")
-window.location.href="index.html"
-}
-else
-{
-alert("Invalid Admin ID or Password")
-}
-
-}
-
-</script>
-
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="box">
 
-<h2>Admin Login</h2>
+<h2>AI Classroom Monitoring</h2>
 
-<input type="text" id="id" placeholder="Admin ID">
-
-<input type="password" id="pass" placeholder="Password">
-
-<button onclick="loginAdmin()">Login</button>
+<button class="admin" onclick="location.href='admin.html'">Admin Login</button>
+<button class="staff" onclick="location.href='staff.html'">Staff Login</button>
+<button class="student" onclick="location.href='student.html'">Student Login</button>
 
 </div>
 
 </body>
 </html>
+```
