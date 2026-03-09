@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RAMCO Classroom Monitoring</title>
+<style>
+body{
+font-family: Arial;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.login-box{
+background:white;
+padding:40px;
+border-radius:10px;
+width:300px;
+text-align:center;
+box-shadow:0 0 10px gray;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#6c63ff;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#574bdb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>RAMCO INSTITUTE</h2>
+<p>Classroom Monitoring System</p>
+
+<input type="text" placeholder="Email or ID">
+<input type="password" placeholder="Password">
+
+<button onclick="login()">Sign In</button>
+
+</div>
+
+<script>
+function login(){
+window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>
