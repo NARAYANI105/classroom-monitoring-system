@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Classroom Monitoring Login</title>
+
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#1e3c72,#2a5298);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.container{
+text-align:center;
+background:white;
+color:black;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+button{
+padding:15px 30px;
+margin:15px;
+border:none;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+.admin{
+background:#ff4b2b;
+color:white;
+}
+
+.student{
+background:#00b09b;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Classroom Monitoring</h1>
+
+<p>Select Login Type</p>
+
+<button class="admin" onclick="location.href='admin.html'">
+Admin / Staff Login
+</button>
+
+<button class="student" onclick="location.href='student.html'">
+Student Login
+</button>
+
+</div>
+
+</body>
+</html>
