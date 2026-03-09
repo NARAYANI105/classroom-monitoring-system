@@ -2,160 +2,307 @@
 <html>
 <head>
 
-<title>Classroom Monitoring System</title>
+<title>Ramco Classroom Monitoring</title>
 
 <link rel="stylesheet" href="style.css">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
 <body>
 
-<h1 class="title">🏫 Ramco Institute Classroom Monitoring</h1>
+<h1 class="title">
+<i class="fa-solid fa-school"></i>
+Ramco Institute Classroom Monitoring
+</h1>
 
-<div class="container" id="container"></div>
+<!-- A BLOCK -->
 
-<script>
+<h2 class="block">A Block</h2>
 
-const classrooms=[
-["A1L03","First Year CSE B"],
-["A1L04","First Year AIML"],
-["A2L05","First Year MECH"],
-["A2L04","First Year CSE A"],
-["A2L03","First Year IT"],
-["A2L02","First Year ECE B"],
-["A2L01","First Year ECE A"],
-["B0L01","First Year AD A"],
-["B0L02","First Year AD B"],
-["B0L03","First Year CSBS"],
-["B1L05","First Year EEE"],
-["B1L04","First Year CSE C"],
-["B1L02","First Year Civil"],
-["B3L05","Final Year AD A"],
-["B3L04","Third Year Civil"],
-["B3L03","Second Year Civil"],
-["B3L02","Final Year CSBS"],
-["C2L05","Second Year MECH"],
-["C2L04","Third Year MECH"],
-["C2L03","Final Year MECH"],
-["C2L02","Third Year IT"],
-["C2L01","Second Year IT"],
-["C3L01","Third Year AD A"],
-["C3L02","Third Year AD B"],
-["C3L03","Second Year AD A"],
-["C3L04","Second Year AD B"],
-["B3R02","Second Year EEE"],
-["B3R03","Third Year EEE"],
-["B3R04","Third Year CSBS"],
-["B3R05","Second Year CSBS"],
-["C3R01","Second Year ECE A"],
-["C3R02","Second Year ECE B"],
-["C3R03","Third Year ECE A"],
-["C3R04","Third Year ECE B"],
-["C3R05","Final Year ECE A"],
-["C2R04","Second Year CSE A"],
-["C2R05","Second Year CSE B"],
-["C2R06","Second Year CSE C"],
-["A2R02","Third Year CSE A"],
-["A2R03","Third Year CSBS B"]
-];
+<h3>1st Floor – Left Side</h3>
 
-const container=document.getElementById("container");
+<div class="container">
 
-classrooms.forEach(room=>{
+<div class="room">
+<h3>A1L03</h3>
+<p>First Year CSE B</p>
 
-let hall=room[0];
-let name=room[1];
+<label>Benches</label>
+<input type="number">
 
-let data=JSON.parse(localStorage.getItem(hall))||{
-bench:"",
-projector:"",
-cpu:"",
-status:"",
-purchase:"",
-battery:"",
-replace:"",
-service:"",
-next:""
-};
-
-let card=document.createElement("div");
-card.className="room";
-
-card.innerHTML=`
-
-<h2>${hall}</h2>
-<p>${name}</p>
-
-<label>🪑 Benches</label>
-<input id="${hall}-bench" value="${data.bench}">
-
-<label>📽 Projector</label>
-<select id="${hall}-projector">
+<label>Projector</label>
+<select>
 <option>Working</option>
 <option>Not Working</option>
 </select>
 
-<label>💻 CPU</label>
-<select id="${hall}-cpu">
+<label>CPU</label>
+<select>
 <option>Working</option>
 <option>Not Working</option>
 </select>
 
-<label>📊 Status</label>
-<select id="${hall}-status">
+<label>Status</label>
+<select>
 <option>Available</option>
 <option>Occupied</option>
 </select>
 
-<label>📅 Equipment Purchase</label>
-<input type="date" id="${hall}-purchase">
+<label>Equipment Purchase</label>
+<input type="date">
 
-<label>🔋 Battery Purchase</label>
-<input type="date" id="${hall}-battery">
+<label>Battery Purchase</label>
+<input type="date">
 
-<label>⚡ Battery Replace</label>
-<input type="date" id="${hall}-replace">
+<label>Last Service</label>
+<input type="date">
 
-<label>🛠 Last Service</label>
-<input type="date" id="${hall}-service">
+<label>Next Service</label>
+<input type="date">
 
-<label>⏭ Next Service</label>
-<input type="date" id="${hall}-next">
+</div>
 
-<button onclick="save('${hall}')">Save</button>
+<div class="room">
+<h3>A1L04</h3>
+<p>First Year AIML</p>
+<label>Benches</label>
+<input type="number">
+<label>Projector</label>
+<select>
+<option>Working</option>
+<option>Not Working</option>
+</select>
+<label>CPU</label>
+<select>
+<option>Working</option>
+<option>Not Working</option>
+</select>
+<label>Status</label>
+<select>
+<option>Available</option>
+<option>Occupied</option>
+</select>
+<label>Equipment Purchase</label>
+<input type="date">
+<label>Battery Purchase</label>
+<input type="date">
+<label>Last Service</label>
+<input type="date">
+<label>Next Service</label>
+<input type="date">
+</div>
 
-`;
+</div>
 
-container.appendChild(card);
 
-});
+<!-- A BLOCK 2nd FLOOR -->
 
-function save(hall){
+<h3>2nd Floor – Left Side</h3>
 
-let data={
-bench:document.getElementById(hall+"-bench").value,
-projector:document.getElementById(hall+"-projector").value,
-cpu:document.getElementById(hall+"-cpu").value,
-status:document.getElementById(hall+"-status").value,
-purchase:document.getElementById(hall+"-purchase").value,
-battery:document.getElementById(hall+"-battery").value,
-replace:document.getElementById(hall+"-replace").value,
-service:document.getElementById(hall+"-service").value,
-next:document.getElementById(hall+"-next").value
-};
+<div class="container">
 
-localStorage.setItem(hall,JSON.stringify(data));
+<div class="room">
+<h3>A2L05</h3>
+<p>First Year MECH</p>
+</div>
 
-alert("Data saved for "+hall);
+<div class="room">
+<h3>A2L04</h3>
+<p>First Year CSE A</p>
+</div>
 
-}
+<div class="room">
+<h3>A2L03</h3>
+<p>First Year IT</p>
+</div>
 
-</script>
+<div class="room">
+<h3>A2L02</h3>
+<p>First Year ECE B</p>
+</div>
+
+<div class="room">
+<h3>A2L01</h3>
+<p>First Year ECE A</p>
+</div>
+
+</div>
+
+
+<h3>2nd Floor – Right Side</h3>
+
+<div class="container">
+
+<div class="room">
+<h3>A2R02</h3>
+<p>Third Year CSE A</p>
+</div>
+
+<div class="room">
+<h3>A2R02A</h3>
+<p>Third Year CSB B</p>
+</div>
+
+</div>
+
+
+<!-- B BLOCK -->
+
+<h2 class="block">B Block</h2>
+
+<h3>Ground Floor – Left</h3>
+
+<div class="container">
+
+<div class="room">
+<h3>B0L01</h3>
+<p>First Year AD A</p>
+</div>
+
+<div class="room">
+<h3>B0L02</h3>
+<p>First Year AD B</p>
+</div>
+
+<div class="room">
+<h3>B0L03</h3>
+<p>First Year CSBS</p>
+</div>
+
+</div>
+
+
+<h3>1st Floor – Left</h3>
+
+<div class="container">
+
+<div class="room">
+<h3>B1L05</h3>
+<p>First Year EEE</p>
+</div>
+
+<div class="room">
+<h3>B1L04</h3>
+<p>First Year CSE C</p>
+</div>
+
+<div class="room">
+<h3>B1L02</h3>
+<p>First Year Civil</p>
+</div>
+
+</div>
+
+
+<h3>3rd Floor – Left</h3>
+
+<div class="container">
+
+<div class="room">
+<h3>B3L05</h3>
+<p>Final Year AD A</p>
+</div>
+
+<div class="room">
+<h3>B3L04</h3>
+<p>Third Year CIVIL</p>
+</div>
+
+<div class="room">
+<h3>B3L03</h3>
+<p>Second Year CIVIL</p>
+</div>
+
+<div class="room">
+<h3>B3L02</h3>
+<p>Final Year CSBS</p>
+</div>
+
+</div>
+
+
+<h3>3rd Floor – Right</h3>
+
+<div class="container">
+
+<div class="room">
+<h3>B3R02</h3>
+<p>Second Year EEE</p>
+</div>
+
+<div class="room">
+<h3>B3R03</h3>
+<p>Third Year EEE</p>
+</div>
+
+<div class="room">
+<h3>B3R04</h3>
+<p>Third Year CSBS</p>
+</div>
+
+<div class="room">
+<h3>B3R05</h3>
+<p>Second Year CSBS</p>
+</div>
+
+</div>
+
+
+<!-- C BLOCK -->
+
+<h2 class="block">C Block</h2>
+
+<h3>2nd Floor – Left</h3>
+
+<div class="container">
+
+<div class="room"><h3>C2L05</h3><p>Second Year MECH</p></div>
+<div class="room"><h3>C2L04</h3><p>Third Year MECH</p></div>
+<div class="room"><h3>C2L03</h3><p>Final Year MECH</p></div>
+<div class="room"><h3>C2L02</h3><p>Third Year IT</p></div>
+<div class="room"><h3>C2L01</h3><p>Second Year IT</p></div>
+
+</div>
+
+
+<h3>2nd Floor – Right</h3>
+
+<div class="container">
+
+<div class="room"><h3>C2R04</h3><p>Second Year CSE A</p></div>
+<div class="room"><h3>C2R05</h3><p>Second Year CSE B</p></div>
+<div class="room"><h3>C2R06</h3><p>Second Year CSE C</p></div>
+
+</div>
+
+
+<h3>3rd Floor – Left</h3>
+
+<div class="container">
+
+<div class="room"><h3>C3L01</h3><p>Third Year AD A</p></div>
+<div class="room"><h3>C3L02</h3><p>Third Year AD B</p></div>
+<div class="room"><h3>C3L03</h3><p>Second Year AD A</p></div>
+<div class="room"><h3>C3L04</h3><p>Second Year AD B</p></div>
+
+</div>
+
+
+<h3>3rd Floor – Right</h3>
+
+<div class="container">
+
+<div class="room"><h3>C3R01</h3><p>Second Year ECE A</p></div>
+<div class="room"><h3>C3R02</h3><p>Second Year ECE B</p></div>
+<div class="room"><h3>C3R03</h3><p>Third Year ECE A</p></div>
+<div class="room"><h3>C3R04</h3><p>Third Year ECE B</p></div>
+<div class="room"><h3>C3R05</h3><p>Final Year ECE A</p></div>
+
+</div>
 
 </body>
 </html>
-<div id="roomsContainer"></div>
