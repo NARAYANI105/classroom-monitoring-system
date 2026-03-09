@@ -1,306 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Classroom Monitoring System</title>
 
-<title>Ramco Classroom Monitoring</title>
+<style>
 
-<link rel="stylesheet" href="style.css">
+body{
+font-family:Arial;
+background:#1e3c72;
+background:linear-gradient(to right,#1e3c72,#2a5298);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+.box{
+background:#ffffff20;
+padding:40px;
+border-radius:12px;
+text-align:center;
+}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+button{
+display:block;
+width:220px;
+padding:12px;
+margin:15px auto;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
 
+.admin{background:#ff5722;color:white;}
+.staff{background:#2196f3;color:white;}
+.student{background:#4caf50;color:white;}
+
+</style>
 </head>
 
 <body>
 
-<h1 class="title">
-<i class="fa-solid fa-school"></i>
-Ramco Institute Classroom Monitoring
-</h1>
+<div class="box">
 
-<!-- A BLOCK -->
+<h2>AI Classroom Monitoring System</h2>
 
-<h2 class="block">A Block</h2>
+<button class="admin" onclick="location.href='admin-login.html'">
+Admin Login
+</button>
 
-<h3>1st Floor – Left Side</h3>
+<button class="staff" onclick="location.href='staff-login.html'">
+Staff Login
+</button>
 
-<div class="container">
-
-<div class="room">
-<h3>A1L03</h3>
-<p>First Year CSE B</p>
-
-<label>Benches</label>
-<input type="number">
-
-<label>Projector</label>
-<select>
-<option>Working</option>
-<option>Not Working</option>
-</select>
-
-<label>CPU</label>
-<select>
-<option>Working</option>
-<option>Not Working</option>
-</select>
-
-<label>Status</label>
-<select>
-<option>Available</option>
-<option>Occupied</option>
-</select>
-
-<label>Equipment Purchase</label>
-<input type="date">
-
-<label>Battery Purchase</label>
-<input type="date">
-
-<label>Last Service</label>
-<input type="date">
-
-<label>Next Service</label>
-<input type="date">
-
-</div>
-
-<div class="room">
-<h3>A1L04</h3>
-<p>First Year AIML</p>
-<label>Benches</label>
-<input type="number">
-<label>Projector</label>
-<select>
-<option>Working</option>
-<option>Not Working</option>
-</select>
-<label>CPU</label>
-<select>
-<option>Working</option>
-<option>Not Working</option>
-</select>
-<label>Status</label>
-<select>
-<option>Available</option>
-<option>Occupied</option>
-</select>
-<label>Equipment Purchase</label>
-<input type="date">
-<label>Battery Purchase</label>
-<input type="date">
-<label>Last Service</label>
-<input type="date">
-<label>Next Service</label>
-<input type="date">
-</div>
-
-</div>
-
-
-<!-- A BLOCK 2nd FLOOR -->
-
-<h3>2nd Floor – Left Side</h3>
-
-<div class="container">
-
-<div class="room">
-<h3>A2L05</h3>
-<p>First Year MECH</p>
-</div>
-
-<div class="room">
-<h3>A2L04</h3>
-<p>First Year CSE A</p>
-</div>
-
-<div class="room">
-<h3>A2L03</h3>
-<p>First Year IT</p>
-</div>
-
-<div class="room">
-<h3>A2L02</h3>
-<p>First Year ECE B</p>
-</div>
-
-<div class="room">
-<h3>A2L01</h3>
-<p>First Year ECE A</p>
-</div>
-
-</div>
-
-
-<h3>2nd Floor – Right Side</h3>
-
-<div class="container">
-
-<div class="room">
-<h3>A2R02</h3>
-<p>Third Year CSE A</p>
-</div>
-
-<div class="room">
-<h3>A2R02A</h3>
-<p>Third Year CSB B</p>
-</div>
-
-</div>
-
-
-<!-- B BLOCK -->
-
-<h2 class="block">B Block</h2>
-
-<h3>Ground Floor – Left</h3>
-
-<div class="container">
-
-<div class="room">
-<h3>B0L01</h3>
-<p>First Year AD A</p>
-</div>
-
-<div class="room">
-<h3>B0L02</h3>
-<p>First Year AD B</p>
-</div>
-
-<div class="room">
-<h3>B0L03</h3>
-<p>First Year CSBS</p>
-</div>
-
-</div>
-
-
-<h3>1st Floor – Left</h3>
-
-<div class="container">
-
-<div class="room">
-<h3>B1L05</h3>
-<p>First Year EEE</p>
-</div>
-
-<div class="room">
-<h3>B1L04</h3>
-<p>First Year CSE C</p>
-</div>
-
-<div class="room">
-<h3>B1L02</h3>
-<p>First Year Civil</p>
-</div>
-
-</div>
-
-
-<h3>3rd Floor – Left</h3>
-
-<div class="container">
-
-<div class="room">
-<h3>B3L05</h3>
-<p>Final Year AD A</p>
-</div>
-
-<div class="room">
-<h3>B3L04</h3>
-<p>Third Year CIVIL</p>
-</div>
-
-<div class="room">
-<h3>B3L03</h3>
-<p>Second Year CIVIL</p>
-</div>
-
-<div class="room">
-<h3>B3L02</h3>
-<p>Final Year CSBS</p>
-</div>
-
-</div>
-
-
-<h3>3rd Floor – Right</h3>
-
-<div class="container">
-
-<div class="room">
-<h3>B3R02</h3>
-<p>Second Year EEE</p>
-</div>
-
-<div class="room">
-<h3>B3R03</h3>
-<p>Third Year EEE</p>
-</div>
-
-<div class="room">
-<h3>B3R04</h3>
-<p>Third Year CSBS</p>
-</div>
-
-<div class="room">
-<h3>B3R05</h3>
-<p>Second Year CSBS</p>
-</div>
-
-</div>
-
-
-<!-- C BLOCK -->
-
-<h2 class="block">C Block</h2>
-
-<h3>2nd Floor – Left</h3>
-
-<div class="container">
-
-<div class="room"><h3>C2L05</h3><p>Second Year MECH</p></div>
-<div class="room"><h3>C2L04</h3><p>Third Year MECH</p></div>
-<div class="room"><h3>C2L03</h3><p>Final Year MECH</p></div>
-<div class="room"><h3>C2L02</h3><p>Third Year IT</p></div>
-<div class="room"><h3>C2L01</h3><p>Second Year IT</p></div>
-
-</div>
-
-
-<h3>2nd Floor – Right</h3>
-
-<div class="container">
-
-<div class="room"><h3>C2R04</h3><p>Second Year CSE A</p></div>
-<div class="room"><h3>C2R05</h3><p>Second Year CSE B</p></div>
-<div class="room"><h3>C2R06</h3><p>Second Year CSE C</p></div>
-
-</div>
-
-
-<h3>3rd Floor – Left</h3>
-
-<div class="container">
-
-<div class="room"><h3>C3L01</h3><p>Third Year AD A</p></div>
-<div class="room"><h3>C3L02</h3><p>Third Year AD B</p></div>
-<div class="room"><h3>C3L03</h3><p>Second Year AD A</p></div>
-<div class="room"><h3>C3L04</h3><p>Second Year AD B</p></div>
-
-</div>
-
-
-<h3>3rd Floor – Right</h3>
-
-<div class="container">
-
-<div class="room"><h3>C3R01</h3><p>Second Year ECE A</p></div>
-<div class="room"><h3>C3R02</h3><p>Second Year ECE B</p></div>
-<div class="room"><h3>C3R03</h3><p>Third Year ECE A</p></div>
-<div class="room"><h3>C3R04</h3><p>Third Year ECE B</p></div>
-<div class="room"><h3>C3R05</h3><p>Final Year ECE A</p></div>
+<button class="student" onclick="location.href='student-login.html'">
+Student Login
+</button>
 
 </div>
 

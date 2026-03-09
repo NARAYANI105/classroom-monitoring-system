@@ -2,63 +2,60 @@
 <html>
 <head>
 <title>Classroom Monitoring System</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#1e3c72;
-background:linear-gradient(to right,#1e3c72,#2a5298);
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-color:white;
-}
-
-.box{
-background:#ffffff20;
-padding:40px;
-border-radius:12px;
-text-align:center;
-}
-
-button{
-display:block;
-width:220px;
-padding:12px;
-margin:15px auto;
-border:none;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
-}
-
-.admin{background:#ff5722;color:white;}
-.staff{background:#2196f3;color:white;}
-.student{background:#4caf50;color:white;}
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="box">
+<h1>Smart Classroom Monitoring</h1>
 
-<h2>AI Classroom Monitoring System</h2>
+<div class="room">
+<h2>Classroom A</h2>
+<p>Status: Available</p>
+<p>Total Benches: 30</p>
 
-<button class="admin" onclick="location.href='admin-login.html'">
-Admin Login
-</button>
+<h3>Equipment Status</h3>
+<p>Projector: Working</p>
+<p>CPU: Good</p>
+<p>Monitor: Working</p>
+<p>Keyboard: Working</p>
 
-<button class="staff" onclick="location.href='staff-login.html'">
-Staff Login
-</button>
+<h3>Purchase Details</h3>
+<p>Projector Purchase Date: 10-03-2023</p>
+<p>CPU Purchase Date: 15-05-2023</p>
+<p>Remote Battery Purchase Date: 10-01-2026</p>
 
-<button class="student" onclick="location.href='student-login.html'">
-Student Login
-</button>
+<h3>Battery Replacement</h3>
+<p>Next Battery Change Date: 10-07-2026</p>
 
+<h3>Maintenance</h3>
+<p>Last Service Date: 01-02-2026</p>
+<p>Next Service Date: 01-08-2026</p>
+</div>
+
+
+<div class="room">
+<h2>Classroom B</h2>
+<p>Status: Occupied</p>
+<p>Total Benches: 25</p>
+
+<h3>Equipment Status</h3>
+<p>Projector: Not Working</p>
+<p>CPU: Good</p>
+<p>Monitor: Working</p>
+<p>Keyboard: Not Working</p>
+
+<h3>Purchase Details</h3>
+<p>Projector Purchase Date: 11-02-2023</p>
+<p>CPU Purchase Date: 05-04-2023</p>
+<p>Remote Battery Purchase Date: 15-01-2026</p>
+
+<h3>Battery Replacement</h3>
+<p>Next Battery Change Date: 15-07-2026</p>
+
+<h3>Maintenance</h3>
+<p>Last Service Date: 10-01-2026</p>
+<p>Next Service Date: 10-07-2026</p>
 </div>
 
 </body>
