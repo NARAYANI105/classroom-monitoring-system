@@ -1,0 +1,67 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+text-align:center;
+}
+
+.container{
+display:flex;
+justify-content:center;
+margin-top:80px;
+gap:40px;
+}
+
+.block{
+width:200px;
+height:200px;
+background:white;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-size:24px;
+cursor:pointer;
+}
+
+.block:hover{
+transform:scale(1.1);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Select Block</h1>
+
+<div class="container">
+
+<div class="block" onclick="location.href='ablock.html'">
+🏫<br>A BLOCK
+</div>
+
+<div class="block" onclick="location.href='bblock.html'">
+🏫<br>B BLOCK
+</div>
+
+<div class="block" onclick="location.href='cblock.html'">
+🏫<br>C BLOCK
+</div>
+
+</div>
+
+</body>
+</html>
+```
