@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Student Login</title>
+
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(135deg,#00b09b,#96c93d);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.login-box{
+background:white;
+padding:40px;
+border-radius:10px;
+text-align:center;
+width:300px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+padding:10px 20px;
+background:#00b09b;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+function loginStudent(){
+
+var id=document.getElementById("id").value
+var pass=document.getElementById("pass").value
+
+if(id=="student" && pass=="1234")
+{
+alert("Login Successful")
+window.location.href="index.html"
+}
+else
+{
+alert("Invalid Student ID or Password")
+}
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>Student Login</h2>
+
+<input type="text" id="id" placeholder="Student ID">
+
+<input type="password" id="pass" placeholder="Password">
+
+<button onclick="loginStudent()">Login</button>
+
+</div>
+
+</body>
+</html>
