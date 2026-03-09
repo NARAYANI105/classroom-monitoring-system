@@ -3,368 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAMCO Institute - Classroom Infrastructure Management System</title>
+    <title>RAMCO Institute - Classroom Monitoring System</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="nav-content">
-                <div class="logo">
-                    <i class="fas fa-school"></i>
-                    <h1>RAMCO Institute - Classroom Infrastructure Monitor</h1>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#dashboard" class="active" onclick="showSection('dashboard')">Dashboard</a></li>
-                    <li><a href="#classrooms" onclick="showSection('classrooms')">Classrooms</a></li>
-                    <li><a href="#equipment" onclick="showSection('equipment')">Equipment</a></li>
-                    <li><a href="#maintenance" onclick="showSection('maintenance')">Maintenance</a></li>
-                    <li><a href="#battery" onclick="showSection('battery')">Battery Management</a></li>
-                    <li><a href="#reports" onclick="showSection('reports')">Reports</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="section active">
-            <h2 class="section-title">System Dashboard</h2>
-            <div class="dashboard-stats">
-                <div class="stat-card animate-card">
-                    <i class="fas fa-door-open"></i>
-                    <h3>Total Classrooms</h3>
-                    <p class="stat-number">40</p>
-                </div>
-                <div class="stat-card animate-card" style="animation-delay: 0.2s;">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>Available Now</h3>
-                    <p class="stat-number">28</p>
-                </div>
-                <div class="stat-card animate-card" style="animation-delay: 0.4s;">
-                    <i class="fas fa-users"></i>
-                    <h3>Occupied</h3>
-                    <p class="stat-number">12</p>
-                </div>
-                <div class="stat-card animate-card" style="animation-delay: 0.6s;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>Maintenance Issues</h3>
-                    <p class="stat-number">3</p>
-                </div>
-            </div>
-
-            <div class="realtime-status">
-                <h3>Real-Time Classroom Status</h3>
-                <div class="classroom-grid">
-                    <div class="classroom-card status-available" data-status="available">
-                        <h4>A1L03</h4>
-                        <p>First Year CSE B</p>
-                        <span class="status-badge">Available</span>
-                    </div>
-                    <div class="classroom-card status-occupied" data-status="occupied">
-                        <h4>A1L04</h4>
-                        <p>First Year AIML</p>
-                        <span class="status-badge">Occupied</span>
-                    </div>
-                    <div class="classroom-card status-maintenance" data-status="maintenance">
-                        <h4>A2L05</h4>
-                        <p>First Year MECH</p>
-                        <span class="status-badge">Under Maintenance</span>
-                    </div>
-                    <div class="classroom-card status-available" data-status="available">
-                        <h4>A2L04</h4>
-                        <p>First Year CSE A</p>
-                        <span class="status-badge">Available</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Classrooms Section -->
-        <section id="classrooms" class="section">
-            <h2 class="section-title">Classroom Management</h2>
-            <div class="filter-bar">
-                <input type="text" placeholder="Search classroom..." id="searchInput" class="search-box">
-                <select id="blockFilter" class="filter-select">
-                    <option value="">All Blocks</option>
-                    <option value="A">Block A</option>
-                    <option value="B">Block B</option>
-                    <option value="C">Block C</option>
-                </select>
-                <button class="btn btn-primary" onclick="addNewClassroom()">+ Add Classroom</button>
-            </div>
-
-            <table class="data-table animate-table">
-                <thead>
-                    <tr>
-                        <th>Hall No</th>
-                        <th>Program</th>
-                        <th>Total Benches</th>
-                        <th>Projector Status</th>
-                        <th>CPU Status</th>
-                        <th>Current Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>A1L03</strong></td>
-                        <td>First Year CSE B</td>
-                        <td>45</td>
-                        <td><span class="status-working">Working</span></td>
-                        <td><span class="status-working">Working</span></td>
-                        <td><span class="status-available">Available</span></td>
-                        <td><button class="btn btn-small" onclick="editClassroom('A1L03')">Edit</button></td>
-                    </tr>
-                    <tr>
-                        <td><strong>A1L04</strong></td>
-                        <td>First Year AIML</td>
-                        <td>45</td>
-                        <td><span class="status-faulty">Faulty</span></td>
-                        <td><span class="status-working">Working</span></td>
-                        <td><span class="status-occupied">Occupied</span></td>
-                        <td><button class="btn btn-small" onclick="editClassroom('A1L04')">Edit</button></td>
-                    </tr>
-                    <tr>
-                        <td><strong>B1L05</strong></td>
-                        <td>First Year EEE</td>
-                        <td>42</td>
-                        <td><span class="status-working">Working</span></td>
-                        <td><span class="status-faulty">Faulty</span></td>
-                        <td><span class="status-available">Available</span></td>
-                        <td><button class="btn btn-small" onclick="editClassroom('B1L05')">Edit</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- Equipment Section -->
-        <section id="equipment" class="section">
-            <h2 class="section-title">Equipment Management</h2>
-            <div class="filter-bar">
-                <select id="equipmentType" class="filter-select">
-                    <option value="">All Equipment</option>
-                    <option value="projector">Projectors</option>
-                    <option value="cpu">CPUs</option>
-                    <option value="bench">Benches</option>
-                </select>
-                <button class="btn btn-primary" onclick="addEquipment()">+ Add Equipment</button>
-            </div>
-
-            <div class="equipment-cards">
-                <div class="equipment-card animate-equipment">
-                    <div class="equipment-header">
-                        <i class="fas fa-tv"></i>
-                        <h3>Projector - A1L03</h3>
-                    </div>
-                    <div class="equipment-details">
-                        <p><strong>Model:</strong> Sony VPL-PHZ10</p>
-                        <p><strong>Purchase Date:</strong> 2022-06-15</p>
-                        <p><strong>Status:</strong> <span class="status-working">Working</span></p>
-                        <p><strong>Warranty Until:</strong> 2026-06-15</p>
-                    </div>
-                    <button class="btn btn-small" onclick="viewEquipmentDetails('A1L03-proj')">View Details</button>
-                </div>
-
-                <div class="equipment-card animate-equipment" style="animation-delay: 0.2s;">
-                    <div class="equipment-header">
-                        <i class="fas fa-desktop"></i>
-                        <h3>CPU - A1L03</h3>
-                    </div>
-                    <div class="equipment-details">
-                        <p><strong>Model:</strong> HP EliteDesk 800</p>
-                        <p><strong>Purchase Date:</strong> 2021-03-20</p>
-                        <p><strong>Status:</strong> <span class="status-working">Working</span></p>
-                        <p><strong>Warranty Until:</strong> 2024-03-20</p>
-                    </div>
-                    <button class="btn btn-small" onclick="viewEquipmentDetails('A1L03-cpu')">View Details</button>
-                </div>
-
-                <div class="equipment-card animate-equipment" style="animation-delay: 0.4s;">
-                    <div class="equipment-header">
-                        <i class="fas fa-battery-half"></i>
-                        <h3>Remote Battery - A1L04</h3>
-                    </div>
-                    <div class="equipment-details">
-                        <p><strong>Type:</strong> AA Alkaline</p>
-                        <p><strong>Purchase Date:</strong> 2025-01-10</p>
-                        <p><strong>Status:</strong> <span class="status-working">Good</span></p>
-                        <p><strong>Replacement Due:</strong> 2026-01-10</p>
-                    </div>
-                    <button class="btn btn-small" onclick="viewEquipmentDetails('A1L04-battery')">View Details</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Maintenance Section -->
-        <section id="maintenance" class="section">
-            <h2 class="section-title">Maintenance History & Schedule</h2>
-            <button class="btn btn-primary" onclick="scheduleService()">+ Schedule Maintenance</button>
-
-            <div class="maintenance-timeline">
-                <div class="timeline-item animate-timeline">
-                    <div class="timeline-marker completed"></div>
-                    <div class="timeline-content">
-                        <h4>Projector Service - A1L03</h4>
-                        <p><strong>Last Service:</strong> 2025-02-15</p>
-                        <p><strong>Type:</strong> Cleaning & Bulb Inspection</p>
-                        <p><strong>Next Due:</strong> 2026-02-15</p>
-                        <p class="technician">Technician: Raj Kumar</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item animate-timeline" style="animation-delay: 0.3s;">
-                    <div class="timeline-marker upcoming"></div>
-                    <div class="timeline-content">
-                        <h4>CPU Annual Maintenance - B1L05</h4>
-                        <p><strong>Scheduled:</strong> 2026-03-20</p>
-                        <p><strong>Type:</strong> Hardware Upgrade & System Check</p>
-                        <p><strong>Estimated Duration:</strong> 4 hours</p>
-                        <p class="technician">Assigned to: Service Team</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item animate-timeline" style="animation-delay: 0.6s;">
-                    <div class="timeline-marker overdue"></div>
-                    <div class="timeline-content">
-                        <h4>Projector Repair - A1L04</h4>
-                        <p><strong>Issue:</strong> Lamp Failure</p>
-                        <p><strong>Status:</strong> <span class="status-faulty">Urgent - In Progress</span></p>
-                        <p><strong>Started:</strong> 2026-03-05</p>
-                        <p class="technician">Technician: Priya Singh</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Battery Management Section -->
-        <section id="battery" class="section">
-            <h2 class="section-title">Battery Management System</h2>
-            <button class="btn btn-primary" onclick="addBatteryRecord()">+ Record Battery Change</button>
-
-            <div class="battery-grid">
-                <div class="battery-card animate-card">
-                    <div class="battery-status critical">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <h4>A1L04 - Remote Batteries</h4>
-                    </div>
-                    <div class="battery-info">
-                        <p><strong>Last Changed:</strong> 2025-10-15</p>
-                        <p><strong>Type:</strong> AA Alkaline (4 pieces)</p>
-                        <p><strong>Current Status:</strong> <span style="color: #ff4444;">LOW - Replace Now</span></p>
-                        <p><strong>Next Replacement Due:</strong> Immediate</p>
-                    </div>
-                    <button class="btn btn-danger" onclick="replaceBattery('A1L04')">Replace Now</button>
-                </div>
-
-                <div class="battery-card animate-card" style="animation-delay: 0.2s;">
-                    <div class="battery-status warning">
-                        <i class="fas fa-battery-quarter"></i>
-                        <h4>B1L02 - Remote Batteries</h4>
-                    </div>
-                    <div class="battery-info">
-                        <p><strong>Last Changed:</strong> 2025-11-20</p>
-                        <p><strong>Type:</strong> AA Alkaline (4 pieces)</p>
-                        <p><strong>Current Status:</strong> <span style="color: #ffaa00;">WARNING - Will expire soon</span></p>
-                        <p><strong>Next Replacement Due:</strong> 2026-03-20</p>
-                    </div>
-                    <button class="btn btn-warning" onclick="scheduleBatteryReplacement('B1L02')">Schedule Replacement</button>
-                </div>
-
-                <div class="battery-card animate-card" style="animation-delay: 0.4s;">
-                    <div class="battery-status good">
-                        <i class="fas fa-battery-full"></i>
-                        <h4>C2L01 - Remote Batteries</h4>
-                    </div>
-                    <div class="battery-info">
-                        <p><strong>Last Changed:</strong> 2025-12-10</p>
-                        <p><strong>Type:</strong> AA Alkaline (4 pieces)</p>
-                        <p><strong>Current Status:</strong> <span style="color: #44ff44;">Good</span></p>
-                        <p><strong>Next Replacement Due:</strong> 2026-06-10</p>
-                    </div>
-                    <button class="btn btn-small" onclick="viewBatteryLog('C2L01')">View Log</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Reports Section -->
-        <section id="reports" class="section">
-            <h2 class="section-title">System Reports & Analytics</h2>
-            <div class="report-buttons">
-                <button class="btn btn-primary" onclick="generateReport('classroom-status')">
-                    <i class="fas fa-chart-bar"></i> Classroom Status Report
-                </button>
-                <button class="btn btn-primary" onclick="generateReport('equipment-health')">
-                    <i class="fas fa-chart-line"></i> Equipment Health Report
-                </button>
-                <button class="btn btn-primary" onclick="generateReport('maintenance-schedule')">
-                    <i class="fas fa-calendar-check"></i> Maintenance Schedule
-                </button>
-                <button class="btn btn-primary" onclick="generateReport('battery-status')">
-                    <i class="fas fa-battery-half"></i> Battery Status Report
-                </button>
-            </div>
-
-            <div class="report-charts">
-                <div class="chart-container">
-                    <h3>Classroom Utilization</h3>
-                    <canvas id="utilizationChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <h3>Equipment Status Distribution</h3>
-                    <canvas id="equipmentChart"></canvas>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Modal for Adding/Editing -->
-    <div id="modal" class="modal">
-        <div class="modal-content animate-modal">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle">Add New Classroom</h2>
-            <form id="formData" class="form-group">
-                <label>Classroom Hall Number:</label>
-                <input type="text" id="hallNumber" placeholder="e.g., A1L03" required>
-                
-                <label>Program:</label>
-                <input type="text" id="program" placeholder="e.g., First Year CSE B" required>
-                
-                <label>Total Benches:</label>
-                <input type="number" id="benches" placeholder="e.g., 45" required>
-                
-                <label>Projector Status:</label>
-                <select id="projectorStatus">
-                    <option value="working">Working</option>
-                    <option value="faulty">Faulty</option>
-                    <option value="maintenance">Under Maintenance</option>
-                </select>
-                
-                <label>CPU Status:</label>
-                <select id="cpuStatus">
-                    <option value="working">Working</option>
-                    <option value="faulty">Faulty</option>
-                    <option value="maintenance">Under Maintenance</option>
-                </select>
-                
-                <label>Current Status:</label>
-                <select id="currentStatus">
-                    <option value="available">Available</option>
-                    <option value="occupied">Occupied</option>
-                    <option value="maintenance">Under Maintenance</option>
-                </select>
-                
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </form>
+    <div class="login-container">
+        <!-- Animated Background -->
+        <div class="animated-bg">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
+
+        <!-- Login Card -->
+        <div class="login-card">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h1>RAMCO INSTITUTE</h1>
+                <p>Classroom Monitoring System</p>
+            </div>
+
+            <!-- User Type Selection -->
+            <div class="user-type-selector">
+                <button class="type-btn active" data-type="student">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Student</span>
+                </button>
+                <button class="type-btn" data-type="staff">
+                    <i class="fas fa-chalkboard-user"></i>
+                    <span>Staff</span>
+                </button>
+                <button class="type-btn" data-type="admin">
+                    <i class="fas fa-shield"></i>
+                    <span>Admin</span>
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email or ID
+                    </label>
+                    <input type="text" id="email" placeholder="Enter your email or ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="Enter password" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="checkbox">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span>Sign In</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="#signup">Contact Administrator</a></p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="toast"></div>
     </div>
 
-    <!-- Notification Alert -->
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notificationText">Operation completed successfully!</span>
-    </div>
+    <script src="js/auth.js"></script>
+    <script>
+        // Password toggle
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.add('fa-eye');
+                icon.classList.remove('fa-eye-slash');
+            }
+        });
 
-    <script src="script.js"></script>
+        // User type selection
+        document.querySelectorAll('.type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('loginForm').dataset.userType = this.dataset.type;
+            });
+        });
+    </script>
 </body>
 </html>
