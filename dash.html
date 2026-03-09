@@ -1,52 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Dashboard</title>
 
-<title>Classroom Dashboard</title>
-<link rel="stylesheet" href="style.css">
+<style>
 
+body{
+font-family:Arial;
+background:#f4f4f4;
+}
+
+header{
+background:#6c63ff;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.rooms{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+padding:30px;
+}
+
+.room{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 5px gray;
+cursor:pointer;
+}
+
+.room:hover{
+transform:scale(1.05);
+}
+
+h3{
+margin:0;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>🏫 Classroom Monitoring Dashboard</h1>
+<header>
+<h2>Classroom Dashboard</h2>
+</header>
 
-<div class="grid">
+<div class="rooms">
 
-<div class="room active">
-<h3>A1L03</h3>
-<p>First Year CSE B</p>
-<p>Benches: 30</p>
-<p>Projector: Working</p>
-<p>CPU: Working</p>
-<p>Status: Occupied</p>
+<div class="room">
+<h3>C3R05</h3>
+<p>Final Year ECE A</p>
 </div>
 
-<div class="room free">
-<h3>A1L04</h3>
-<p>First Year AIML</p>
-<p>Benches: 28</p>
-<p>Projector: Working</p>
-<p>CPU: Working</p>
-<p>Status: Free</p>
+<div class="room">
+<h3>C3R04</h3>
+<p>Third Year ECE B</p>
 </div>
 
-<div class="room active">
-<h3>A2L05</h3>
-<p>First Year MECH</p>
-<p>Benches: 32</p>
-<p>Projector: Working</p>
-<p>CPU: Not Working</p>
-<p>Status: Occupied</p>
+<div class="room">
+<h3>B3L02</h3>
+<p>Final Year CSBS</p>
 </div>
 
-<div class="room free">
-<h3>B0L01</h3>
-<p>First Year AD A</p>
-<p>Benches: 25</p>
-<p>Projector: Working</p>
-<p>CPU: Working</p>
-<p>Status: Free</p>
+<div class="room">
+<h3>A2L01</h3>
+<p>First Year ECE A</p>
+</div>
+
+<div class="room">
+<h3>B1L04</h3>
+<p>First Year CSE C</p>
+</div>
+
+<div class="room">
+<h3>C2L03</h3>
+<p>Final Year MECH</p>
 </div>
 
 </div>
