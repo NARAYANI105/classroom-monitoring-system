@@ -4,7 +4,6 @@
 <title>Classroom Monitoring System</title>
 
 <style>
-
 body{
 font-family: Arial;
 background: linear-gradient(to right,#667eea,#764ba2);
@@ -18,16 +17,12 @@ align-items:center;
 background:white;
 padding:40px;
 border-radius:10px;
-box-shadow:0 0 15px gray;
+box-shadow:0 0 10px gray;
 text-align:center;
-width:350px;
+width:300px;
 }
 
-h2{
-margin-bottom:20px;
-}
-
-select,input{
+input,select{
 width:90%;
 padding:10px;
 margin:10px;
@@ -43,11 +38,6 @@ border:none;
 border-radius:5px;
 cursor:pointer;
 }
-
-button:hover{
-background:#0056b3;
-}
-
 </style>
 
 <script>
@@ -56,23 +46,29 @@ function loginUser(){
 
 var role=document.getElementById("role").value;
 var id=document.getElementById("id").value;
-var pass=document.getElementById("pass").value;
+var password=document.getElementById("password").value;
 
-if(id=="" || pass==""){
-alert("Please enter ID and Password");
+if(id=="" || password==""){
+alert("Enter ID and Password");
 return;
 }
 
-if(role=="student"){
-window.location="floors.html";
+/* simple login check */
+
+if(role=="student" && id=="student" && password=="123"){
+window.location.href="floors.html";
 }
 
-if(role=="staff"){
-window.location="floors.html";
+else if(role=="staff" && id=="staff" && password=="123"){
+window.location.href="floors.html";
 }
 
-if(role=="admin"){
-window.location="floors.html";
+else if(role=="admin" && id=="admin" && password=="123"){
+window.location.href="floors.html";
+}
+
+else{
+alert("Invalid Login");
 }
 
 }
@@ -85,7 +81,7 @@ window.location="floors.html";
 
 <div class="login-box">
 
-<h2>Classroom Monitoring Login</h2>
+<h2>Login</h2>
 
 <select id="role">
 <option value="student">Student</option>
@@ -95,11 +91,11 @@ window.location="floors.html";
 
 <input type="text" id="id" placeholder="Enter ID">
 
-<input type="password" id="pass" placeholder="Enter Password">
+<input type="password" id="password" placeholder="Enter Password">
 
 <br><br>
 
-<button onclick="loginUser()">Login</button>
+<button onclick="loginUser()">Sign In</button>
 
 </div>
 
