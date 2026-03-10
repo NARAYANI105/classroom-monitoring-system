@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Classroom Monitoring System</title>
+
+<style>
+
+body{
+font-family: Arial;
+background: linear-gradient(to right,#667eea,#764ba2);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.login-box{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 0 15px gray;
+text-align:center;
+width:350px;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+select,input{
+width:90%;
+padding:10px;
+margin:10px;
+border-radius:5px;
+border:1px solid gray;
+}
+
+button{
+background:#007BFF;
+color:white;
+padding:10px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+</style>
+
+<script>
+
+function loginUser(){
+
+var role=document.getElementById("role").value;
+var id=document.getElementById("id").value;
+var pass=document.getElementById("pass").value;
+
+if(id=="" || pass==""){
+alert("Please enter ID and Password");
+return;
+}
+
+if(role=="student"){
+window.location="floors.html";
+}
+
+if(role=="staff"){
+window.location="floors.html";
+}
+
+if(role=="admin"){
+window.location="floors.html";
+}
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>Classroom Monitoring Login</h2>
+
+<select id="role">
+<option value="student">Student</option>
+<option value="staff">Staff</option>
+<option value="admin">Admin</option>
+</select>
+
+<input type="text" id="id" placeholder="Enter ID">
+
+<input type="password" id="pass" placeholder="Enter Password">
+
+<br><br>
+
+<button onclick="loginUser()">Login</button>
+
+</div>
+
+</body>
+</html>
